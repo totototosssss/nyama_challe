@@ -1,1 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>にゃまチャレンジ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Roboto:wght@400;500;700&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="stone.png"> </head>
+<body>
+    <div id="app-background-effect"></div> <div id="difficulty-selection-screen">
+        <div class="difficulty-content">
+            <h1 class="game-main-title difficulty-title">にゃまチャレンジ</h1>
+            <p class="game-subtitle difficulty-subtitle">15日間の精神サバイバル</p>
+            <h2>難易度を選択してください</h2>
+            <div class="difficulty-buttons">
+                <button class="button-difficulty" data-difficulty="story">
+                    <i class="fas fa-book-open"></i>
+                    物語体験モード
+                    <small>にゃまの物語をじっくり楽しみたいあなたへ。</small>
+                </button>
+                <button class="button-difficulty" data-difficulty="normal">
+                    <i class="fas fa-brain"></i>
+                    通常モード
+                    <small>標準的な難易度で精神の限界に挑戦。</small>
+                </button>
+                <button class="button-difficulty" data-difficulty="reality">
+                    <i class="fas fa-skull-crossbones"></i>
+                    にゃまの現実モード
+                    <small>容赦ない日常とストレス。真の露悪体験を求めるなら。</small>
+                </button>
+            </div>
+        </div>
+    </div>
 
+    <div class="game-container" style="display: none;">
+        <header class="game-header">
+            <div class="header-title-wrapper">
+                <h1 class="game-main-title">にゃまチャレンジ</h1>
+                <span class="game-subtitle">精神サバイバル (仮)</span>
+            </div>
+            <div class="header-info-bar">
+                <div class="info-item day-counter">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>
+                        <span id="day-display">1</span>日目 /
+                        <span id="max-days-display">15</span>日
+                    </span>
+                </div>
+                <div class="info-item money-display">
+                    <i class="fas fa-coins"></i> <span>
+                        活動資金: <span id="money-display-header-value">0</span>円
+                    </span>
+                </div>
+                <button id="open-shop-button" class="button-primary shop-open-button">
+                    <i class="fas fa-store"></i> ショップ
+                </button>
+                 </div>
+        </header>
+
+        <div class="event-notification-area" id="event-notification" style="display: none;">
+            <p id="event-message"></p>
+        </div>
+
+        <main class="game-main-content">
+            <section class="status-and-character-section">
+                <div class="character-display">
+                    <div class="character-image-container">
+                        <img src="stone.png" alt="にゃま" id="nyama-image">
+                    </div>
+                    <div id="nyama-thought-bubble" class="thought-bubble" style="display: none;">
+                        ...
+                    </div>
+                </div>
+                <div class="status-grid">
+                    <h2><i class="fas fa-chart-line"></i> 現在の状態</h2>
+                    <div class="params">
+                        <p data-param="hp">
+                            <i class="fas fa-heartbeat"></i>HP:
+                            <span id="hp-display">100</span>
+                        </p>
+                        <p data-param="sanity">
+                            <i class="fas fa-brain"></i>Sanity:
+                            <span id="sanity-display">70</span>
+                        </p>
+                        <p data-param="philosophy">
+                            <i class="fas fa-book-reader"></i>Philosophy:
+                            <span id="philosophy-display">30</span>
+                        </p>
+                        <p data-param="sleepDebt">
+                            <i class="fas fa-bed"></i>SleepDebt:
+                            <span id="sleepDebt-display">10</span>
+                        </p>
+                        <p data-param="shiroHate">
+                            <i class="fas fa-bomb"></i>ShiroHate:
+                            <span id="shiroHate-display">0</span>
+                        </p>
+                    </div>
+                    <div class="inventory-display">
+                        <h3><i class="fas fa-box-archive"></i> 所持アイテム</h3>
+                        <ul id="inventory-list">
+                            <li class="no-items">なし</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="actions-section">
+                <h2><i class="fas fa-tasks"></i> 今日の行動</h2>
+                <div class="action-buttons-grid">
+                    <button data-action="study_philosophy">
+                        <i class="fas fa-book"></i> 哲学書を読む
+                    </button>
+                    <button data-action="go_to_university">
+                        <i class="fas fa-university"></i> 大学へ行く
+                    </button>
+                    <button data-action="engage_shiro">
+                        <i class="fab fa-twitter"></i> しろちゃんを煽る
+                    </button>
+                    <button data-action="do_part_time_job">
+                        <i class="fas fa-briefcase"></i> バイトをする
+                    </button>
+                    <button data-action="self_affirmation">
+                        <i class="fas fa-hat-wizard"></i> "天才"的自己分析
+                    </button>
+                    <button data-action="try_to_rest" class="action-sleep">
+                        <i class="fas fa-moon"></i> 休息する
+                    </button>
+                    <button data-action="seek_medication">
+                        <i class="fas fa-pills"></i> 薬を探す/飲む
+                    </button>
+                </div>
+            </section>
+
+            <section class="log-section">
+                <h2><i class="fas fa-scroll"></i> 行動記録</h2>
+                <div id="log-message-area">
+                    <p id="log-message">
+                        にゃまの15日間の戦いが始まる…。
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="game-footer">
+            <p>&copy; 2025 にゃまチャレンジ製作委員会</p>
+        </footer>
+    </div>
+
+    <div class="modal" id="ending-modal"> <div class="modal-content">
+            <button class="modal-close-button" data-modal-id="ending-modal">
+                &times;
+            </button>
+            <h2 id="ending-title">15日間の終焉</h2>
+            <div id="ending-nyama-image-container" class="modal-character-image">
+                <img src="stone.png" alt="運命のにゃま" id="ending-nyama-image">
+            </div>
+            <div id="ending-calculation-message" class="loading-indicator" style="display:none;">
+                <p>運命の歯車が回っています…</p>
+                <div class="spinner"></div>
+            </div>
+            <div id="ending-actual-result" style="display:none;">
+                <p id="ending-result-message" class="result-narrative"></p>
+                </div>
+            <button id="restart-game-button" class="button-primary">
+                もう一度挑戦する
+            </button>
+        </div>
+    </div>
+
+    <div class="modal" id="item-shop-modal">
+        <div class="modal-content">
+            <button class="modal-close-button" data-modal-id="item-shop-modal">
+                &times;
+            </button>
+            <h2><i class="fas fa-store-alt"></i> アイテムショップ (仮)</h2>
+            <p class="shop-info">
+                現在の活動資金: <span id="shop-money-display">0</span>円
+            </p>
+            <div id="item-shop-list" class="item-shop-grid">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
